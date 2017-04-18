@@ -7,11 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostingsComponent implements OnInit {
 
-    public onScrolled() {
-	console.log('scrolled');
-	this.folders = this.folders.concat([...this.folders]);
-    }
-
     folders = [
 	{
 	    name: 'Photos',
@@ -52,4 +47,8 @@ export class PostingsComponent implements OnInit {
     ngOnInit() {
     }
 
+    public onScrolled() {
+	console.log('scrolled');
+	this.folders = this.folders.concat([...this.folders]);
+    }
 }
