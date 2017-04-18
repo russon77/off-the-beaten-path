@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.limit-width {
+    width: 400px;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.center-header {
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+@media all and (max-width: 400px) {
+    .limit-width {
+	width: 90%;
+    }
+}

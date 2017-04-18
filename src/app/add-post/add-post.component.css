@@ -1,0 +1,27 @@
+.full-width {
+    width: 100%;
+}
+
+/* thanks to http://stackoverflow.com/a/21842275 */
+.myLabel {
+    border: 2px solid #AAA;
+    border-radius: 4px;
+    padding: 2px 5px;
+    margin: 2px;
+    background: #DDD;
+    display: inline-block;
+    flex: 1 1 auto;
+    text-align: center;
+}
+.myLabel:hover {
+    background: #CCC;
+}
+.myLabel:active {
+    background: #CCF;
+}
+.myLabel :invalid + span {
+    color: #A44;
+}
+.myLabel :valid + span {
+    color: #4A4;
+}

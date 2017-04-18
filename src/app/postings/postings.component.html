@@ -1,0 +1,48 @@
+<md-toolbar>
+    <span class="center-header">Bulletin Board</span>
+
+    <md-toolbar-row>
+	<span class="center-header">
+	    123.324&deg;, 123.345&deg;
+	</span>
+    </md-toolbar-row>
+</md-toolbar>
+
+<div class="container">
+    <!-- todo: this should fill remaining vertical space, if available -->
+    <md-card class="limit-width">
+	<md-card-header>
+	    <md-card-title class="center-header">
+		There have been 7 visitors today at an average rate of 3 visitors per hour.
+	    </md-card-title>
+	    <md-card-subtitle></md-card-subtitle>
+	</md-card-header>
+	<md-card-content>
+	    <md-list
+		class="limit-height"
+		infinite-scroll
+		[infiniteScrollDistance]="2"
+		[infiniteScrollThrottle]="500"
+		(scrolled)="onScrolled()"
+		[scrollWindow]="false">
+		<h3 md-subheader>Visitors</h3>
+		<md-list-item *ngFor="let folder of folders; let isLast = last">
+		    <img md-list-avatar src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+		    <h4 md-line>{{folder.name}} {{ isLast && 'last element' }}</h4>
+		    <div md-line style="display: flex;">
+			{{folder.updated | date}} 
+			<span class="example-spacer"></span>
+			<span>3.2 m</span>
+		    </div>
+		</md-list-item>
+	    </md-list>
+
+	</md-card-content>
+	<md-card-actions class="container">
+	    <a routerLink="/post" md-button class="example-spacer">Add Post</a>
+	    <button md-button class="example-spacer">Share</button>
+	</md-card-actions>
+    </md-card>
+</div>
+
+

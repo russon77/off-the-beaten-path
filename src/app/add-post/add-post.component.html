@@ -1,0 +1,51 @@
+<md-toolbar>
+    <span class="center-header">
+	Add New Post to Bulletin
+    </span>
+</md-toolbar>
+
+<div class="container">
+    <md-card class="limit-width">
+	<md-card-content>
+	    <form>
+ 		<p>
+		    <md-input-container class="full-width">
+			<textarea #message mdInput placeholder="Message (Required)" maxlength="140"></textarea>
+			<md-hint align="end">{{message.value.length}} / 140</md-hint>
+		    </md-input-container>
+		</p>
+
+		<h5>
+		    Upload an Image
+		</h5>
+
+		<div class="container">
+		    <label class="myLabel">
+			<input hidden type="file"
+			       class="hidden"
+			       ngFileSelect
+			       [options]="options"
+			       [events]="inputUploadEvents"
+			       (onUpload)="handleUpload($event)"
+			       (onPreviewData)="handlePreviewData($event)"
+			       (beforeUpload)="beforeUpload($event)">
+			<span>Browse</span>
+		    </label>
+		</div>
+	    </form>
+
+	    <p>
+		Allowed extensions: <code><b>.jpg</b>, <b>.png</b></code>
+	    </p>
+
+	    <div *ngIf="previewData">
+		<h6>Selected Image</h6>
+		<img width="380" [src]="previewData">
+	    </div>
+	</md-card-content>
+	<md-card-actions class="container">
+	    <a routerLink="/bulletin" md-button class="example-spacer">Return</a>
+	    <button md-button class="example-spacer">Save</button>
+	</md-card-actions>
+    </md-card>
+</div>
