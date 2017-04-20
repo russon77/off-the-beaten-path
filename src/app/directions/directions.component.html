@@ -15,7 +15,7 @@
 	    </div>
 	</md-card-content>
 	<md-card-actions class="container">
-	    <a *ngIf="closeEnough; else updateButton" routerLink="/bulletin" class="example-spacer animated swing" md-button>
+	    <a *ngIf="closeEnough; else updateButton" [routerLink]="['/bulletin', target.key]" class="example-spacer animated swing" md-button>
 		Bulletin
 	    </a>
 	    <ng-template #updateButton>

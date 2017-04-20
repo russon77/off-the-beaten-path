@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { GameService } from '../services/game.service';
 
 import { Directions } from '../models/directions.model';
+import { TargetLocation } from '../models/target.model';
 
 @Component({
     selector: 'app-directions',
@@ -12,6 +13,8 @@ import { Directions } from '../models/directions.model';
 export class DirectionsComponent implements OnInit {
 
     public directions: Directions;
+    public target: TargetLocation;
+    
     public closeEnough: boolean = false;
 
     constructor(private gameService: GameService) { }

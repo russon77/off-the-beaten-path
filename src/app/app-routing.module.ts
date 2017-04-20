@@ -12,11 +12,11 @@ const routes: Routes = [
 	component: DirectionsComponent
     },
     {
-	path: 'bulletin',
+	path: 'bulletin/:key',
 	component: PostingsComponent
     },
     {
-	path: 'post',
+	path: 'post/:key',
 	component: AddPostComponent
     },
     {

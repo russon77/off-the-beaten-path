@@ -1,6 +1,7 @@
 export class EasyPagination <T> {
     constructor(
 	public data: T[],
-	lastPage: boolean
+	public pageNumber: number,
+	public lastPage: boolean
     ) {}
 }

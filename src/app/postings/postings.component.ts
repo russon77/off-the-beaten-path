@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { BackendService } from '../services/backend.service';
+
+import { ViewPost } from '../models/post.model';
+import { EasyPagination } from '../models/easy-pagination.model';
+import { TargetLocation } from '../models/target.model';
 
 @Component({
     selector: 'app-postings',
@@ -7,48 +14,51 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostingsComponent implements OnInit {
 
-    folders = [
-	{
-	    name: 'Photos',
-	    updated: new Date('1/1/16'),
-	},
-	{
-	    name: 'Recipes',
-	    updated: new Date('1/17/16'),
-	},
-	{
-	    name: 'Work',
-	    updated: new Date('1/28/16'),
-	},
-	{
-	    name: 'Work',
-	    updated: new Date('1/28/16'),
-	},
-	{
-	    name: 'Work',
-	    updated: new Date('1/28/16'),
-	},
-	{
-	    name: 'Work',
-	    updated: new Date('1/28/16'),
-	},
-	{
-	    name: 'Work',
-	    updated: new Date('1/28/16'),
-	},
-	{
-	    name: 'Work',
-	    updated: new Date('1/28/16'),
-	},
-    ];
+    public target: TargetLocation;
 
-    constructor() { }
+    public posts: ViewPost[];
+    public currentPage: number;
+
+    private _key: string;
+
+    constructor(private backendService: BackendService,
+		private route: ActivatedRoute) { }
 
     ngOnInit() {
+	this.route
+	    .params
+	    .switchMap(
+		params => {
+		    this._key = params['key'];
+		    
+		    return this.backendService.getPosts(params['key']);
+		}
+	    )
+	    .subscribe(
+		success => {
+		    this.posts = success.data;
+		    this.currentPage = success.pageNumber;
+		},
+		error => {
+		    console.log('PostingsComponent', error);
+		}
+	    );
     }
 
     public onScrolled() {
-	console.log('scrolled');
-	this.folders = this.folders.concat([...this.folders]);
+	this.backendService
+	    .getPosts(
+		this._key,
+		this.currentPage + 1
+	    )
+	    .subscribe(
+		success => {
+		    this.posts = this.posts.concat(success.data);
+		    this.currentPage = success.pageNumber;
+		},
+		error => {
+		    console.log('PostingsComponent', error);
+		}
+	    );
     }
 }
