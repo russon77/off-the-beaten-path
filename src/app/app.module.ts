@@ -2,17 +2,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MdToolbarModule,
-	 MdButtonModule,
-	 MdSlideToggleModule,
-	 MdCardModule,
-	 MdInputModule,
-	 MdListModule,
-	 MdIconModule
-       } from '@angular/material';
+import {
+    MdToolbarModule,
+    MdButtonModule,
+    MdSlideToggleModule,
+    MdCardModule,
+    MdInputModule,
+    MdListModule,
+    MdIconModule
+} from '@angular/material';
 
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
@@ -28,41 +30,43 @@ import { AddPostComponent } from './add-post/add-post.component';
 import { SettingsAndHelpComponent } from './settings-and-help/settings-and-help.component';
 
 import { BackendService } from './services/backend.service';
-import { GeolocationService} from './services/geolocation.service';
+import { GeolocationService } from './services/geolocation.service';
 import { GameService } from './services/game.service';
 
 @NgModule({
     declarations: [
-	AppComponent,
-	HeaderComponent,
-	DirectionsComponent,
-	PostingsComponent,
-	AddPostComponent,
-	SettingsAndHelpComponent
+        AppComponent,
+        HeaderComponent,
+        DirectionsComponent,
+        PostingsComponent,
+        AddPostComponent,
+        SettingsAndHelpComponent
     ],
     imports: [
-	BrowserModule,
-	FormsModule,
-	HttpModule,
-	BrowserAnimationsModule,
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        BrowserAnimationsModule,
 
-	AppRoutingModule,
+        ReactiveFormsModule,
 
-	MdToolbarModule,
-	MdButtonModule,
-	MdSlideToggleModule,
-	MdCardModule,
-	MdInputModule,
-	MdListModule,
-	MdIconModule,
+        AppRoutingModule,
 
-	InfiniteScrollModule,
-	NgUploaderModule
+        MdToolbarModule,
+        MdButtonModule,
+        MdSlideToggleModule,
+        MdCardModule,
+        MdInputModule,
+        MdListModule,
+        MdIconModule,
+
+        InfiniteScrollModule,
+        NgUploaderModule
     ],
     providers: [
-	GeolocationService,
-	BackendService,
-	GameService
+        GeolocationService,
+        BackendService,
+        GameService
     ],
     bootstrap: [AppComponent]
 })

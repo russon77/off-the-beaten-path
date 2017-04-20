@@ -1,5 +1,11 @@
 import { Component, OnInit, EventEmitter, Inject, NgZone } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 import { NgUploaderOptions, UploadedFile } from 'ngx-uploader';
+
+import { GeolocationService } from '../services/geolocation.service';
+import { BackendService } from '../services/backend.service';
 
 @Component({
     selector: 'app-add-post',
@@ -15,50 +21,76 @@ export class AddPostComponent implements OnInit {
     public response: any;
     public inputUploadEvents: EventEmitter<string>;
 
-    constructor(@Inject(NgZone) private zone: NgZone) {
-	this.options = new NgUploaderOptions({
-	    url: 'http://api.ngx-uploader.com/upload',
-	    filterExtensions: true,
-	    allowedExtensions: ['jpg', 'png'],
-	    data: { userId: 12 },
-	    autoUpload: false,
-	    fieldName: 'file',
-	    fieldReset: true,
-	    maxUploads: 2,
-	    method: 'POST',
-	    previewUrl: true,
-	    withCredentials: false
-	});
+    public key: string;
 
-	this.inputUploadEvents = new EventEmitter<string>();
+    public postForm: FormGroup;
+
+    constructor( @Inject(NgZone) private zone: NgZone,
+        private route: ActivatedRoute,
+        private locationService: GeolocationService,
+        private backendService: BackendService) {
+        this.options = new NgUploaderOptions({
+            url: 'https://todo',
+            filterExtensions: true,
+            allowedExtensions: ['jpg', 'png'],
+            data: {},
+            autoUpload: false,
+            fieldName: 'image',
+            fieldReset: false,
+            maxUploads: 1,
+            method: 'POST',
+            previewUrl: true,
+            withCredentials: false
+        });
+
+        this.inputUploadEvents = new EventEmitter<string>();
+
+        this.postForm = new FormGroup({
+            message: new FormControl(null, Validators.required),
+            imageId: new FormControl()
+        });
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.route
+            .params
+            .switchMap(
+            params => {
+                this.key = params['key'];
+
+                return this.locationService.getCurrentPosition();
+            }
+            )
+            .subscribe(
+            success => { },
+            error => { }
+            );
+    }
 
     startUpload() {
-	this.inputUploadEvents.emit('startUpload');
+        this.inputUploadEvents.emit('startUpload');
     }
 
     beforeUpload(uploadingFile: UploadedFile): void {
-	if (uploadingFile.size > this.sizeLimit) {
-	    uploadingFile.setAbort();
-	    this.errorMessage = 'File is too large!';
-	}
+        if (uploadingFile.size > this.sizeLimit) {
+            uploadingFile.setAbort();
+            this.errorMessage = 'File is too large!';
+        }
     }
 
     handleUpload(data: any) {
-	setTimeout(() => {
-	    this.zone.run(() => {
-		this.response = data;
-		if (data && data.response) {
-		    this.response = JSON.parse(data.response);
-		}
-	    });
-	});
+        setTimeout(() => {
+            this.zone.run(() => {
+                this.response = data;
+                if (data && data.response) {
+                    this.response = JSON.parse(data.response);
+                }
+            });
+        });
     }
 
     handlePreviewData(data: any) {
-	this.previewData = data;
+        this.previewData = data;
     }
 
 }

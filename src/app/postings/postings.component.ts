@@ -19,46 +19,46 @@ export class PostingsComponent implements OnInit {
     public posts: ViewPost[];
     public currentPage: number;
 
-    private _key: string;
+    public key: string;
 
     constructor(private backendService: BackendService,
-		private route: ActivatedRoute) { }
+        private route: ActivatedRoute) { }
 
     ngOnInit() {
-	this.route
-	    .params
-	    .switchMap(
-		params => {
-		    this._key = params['key'];
-		    
-		    return this.backendService.getPosts(params['key']);
-		}
-	    )
-	    .subscribe(
-		success => {
-		    this.posts = success.data;
-		    this.currentPage = success.pageNumber;
-		},
-		error => {
-		    console.log('PostingsComponent', error);
-		}
-	    );
+        this.route
+            .params
+            .switchMap(
+            params => {
+                this.key = params['key'];
+
+                return this.backendService.getPosts(params['key']);
+            }
+            )
+            .subscribe(
+            success => {
+                this.posts = success.data;
+                this.currentPage = success.pageNumber;
+            },
+            error => {
+                console.log('PostingsComponent', error);
+            }
+            );
     }
 
     public onScrolled() {
-	this.backendService
-	    .getPosts(
-		this._key,
-		this.currentPage + 1
-	    )
-	    .subscribe(
-		success => {
-		    this.posts = this.posts.concat(success.data);
-		    this.currentPage = success.pageNumber;
-		},
-		error => {
-		    console.log('PostingsComponent', error);
-		}
-	    );
+        this.backendService
+            .getPosts(
+            this.key,
+            this.currentPage + 1
+            )
+            .subscribe(
+            success => {
+                this.posts = this.posts.concat(success.data);
+                this.currentPage = success.pageNumber;
+            },
+            error => {
+                console.log('PostingsComponent', error);
+            }
+            );
     }
 }

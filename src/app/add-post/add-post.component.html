@@ -7,10 +7,10 @@
 <div class="container">
     <md-card class="limit-width">
 	<md-card-content>
-	    <form>
+	    <form [formGroup]="postForm" novalidate>
  		<p>
 		    <md-input-container class="full-width">
-			<textarea #message mdInput placeholder="Message (Required)" maxlength="140"></textarea>
+			<textarea #message mdInput formControlName="message" placeholder="Message (Required)" maxlength="140"></textarea>
 			<md-hint align="end">{{message.value.length}} / 140</md-hint>
 		    </md-input-container>
 		</p>
@@ -44,8 +44,8 @@
 	    </div>
 	</md-card-content>
 	<md-card-actions class="container">
-	    <a routerLink="/bulletin" md-button class="example-spacer">Return</a>
-	    <button md-button class="example-spacer">Save</button>
+	    <a [routerLink]="['/bulletin', key]" md-button class="example-spacer">Return</a>
+	    <button (click)="onSubmit()" [disabled]="!postForm.valid" md-button class="example-spacer">Submit</button>
 	</md-card-actions>
     </md-card>
 </div>

@@ -26,20 +26,20 @@
 		(scrolled)="onScrolled()"
 		[scrollWindow]="false">
 		<h3 md-subheader>Visitors</h3>
-		<md-list-item *ngFor="let folder of folders; let isLast = last">
-		    <img md-list-avatar src="https://material.angular.io/assets/img/examples/shiba2.jpg">
-		    <h4 md-line>{{folder.name}} {{ isLast && 'last element' }}</h4>
+		<md-list-item *ngFor="let post of posts; let isLast = last">
+		  <img md-list-avatar src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+		    <h4 md-line>{{post.text}}</h4>
 		    <div md-line style="display: flex;">
-			{{folder.updated | date}} 
+			{{post.timestamp | date}} 
 			<span class="example-spacer"></span>
-			<span>3.2 m</span>
+			<span>{{ post.finalDistance }} m</span>
 		    </div>
 		</md-list-item>
 	    </md-list>
 
 	</md-card-content>
 	<md-card-actions class="container">
-	    <a routerLink="/post" md-button class="example-spacer">Add Post</a>
+	    <a [routerLink]="['/post', key]" md-button class="example-spacer">Add Post</a>
 	    <button md-button class="example-spacer">Share</button>
 	</md-card-actions>
     </md-card>
