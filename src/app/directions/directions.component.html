@@ -10,12 +10,19 @@
 	<md-card-content>
 	    <div class="container">
 		<p>
-		    Distance: 200 meters
+		    Distance: {{ directions.distance }} meters
 		</p>
 	    </div>
 	</md-card-content>
 	<md-card-actions class="container">
-	    <a class="example-spacer" routerLink="/bulletin" md-button>Update</a>
+	    <a *ngIf="closeEnough; else updateButton" routerLink="/bulletin" class="example-spacer animated pulse" md-button>
+		Bulletin
+	    </a>
+	    <ng-template #updateButton>
+		<button  (click)="onUpdate()" class="example-spacer" md-button>
+		    Update
+		</button>
+	    </ng-template>
 	    <a class="example-spacer" routerLink="/help" md-button>Settings and Help</a>
 	</md-card-actions>
     </md-card>

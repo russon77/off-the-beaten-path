@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { GeolocationService } from './services/geolocation.service';
+import { GameService } from './services/game.service';
 
 @Component({
     selector: 'app-root',
@@ -8,15 +8,16 @@ import { GeolocationService } from './services/geolocation.service';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    title = 'app works!';
-
-    constructor(private locationService: GeolocationService) {
-	(<any>window).loading_screen.finish();
-
-	locationService.watchPosition().subscribe(
-	    success => console.log(success),
-	    error => console.log(error),
-	    () => console.log('completed')
-	);
+    constructor(private gameService: GameService) {
+	this.gameService
+	    .initialize()
+	    .subscribe(
+		success => {
+		    (<any>window).loading_screen.finish();
+		},
+		error => {
+		    console.log('AppComponent', error);
+		}
+	    );
     }
 }

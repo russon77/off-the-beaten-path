@@ -4,8 +4,11 @@ import { LatLngPosition } from '../models/position.model';
 import { EasyPagination } from '../models/easy-pagination.model';
 import { Directions } from '../models/directions.model';
 import { ViewPost, SubmissionPost } from '../models/post.model';
+import { TargetLocation } from '../models/target.model';
 
-const EXAMPLE_DIRECTIONS: Directions = new Directions('N', 250, null);
+// const EXAMPLE_DIRECTIONS: Directions = new Directions('N', 250);
+
+const EXAMPLE_LOCATION: TargetLocation = new TargetLocation(new LatLngPosition(1, 2), 'secret_key');
 
 const EXAMPLE_POSTS: ViewPost[] = [
     new ViewPost('Wow! Great view!', 'https://material.angular.io/assets/img/examples/shiba2.jpg', 42, 1492547287),
@@ -26,8 +29,8 @@ export class BackendService {
 
     constructor() { }
 
-    getDirections(currentLocation: LatLngPosition): Observable<Directions> {
-	return Observable.of(EXAMPLE_DIRECTIONS);
+    getTargetLocation(currentLocation: LatLngPosition): Observable<TargetLocation> {
+	return Observable.of(EXAMPLE_LOCATION);
     }
 
     getPosts(key: string, page: number = 0): Observable<EasyPagination<ViewPost>> {
