@@ -10,11 +10,11 @@ import { LatLngPosition } from '../models/position.model';
 export class GeolocationService {
 
     private _lastKnownPosition: null | LatLngPosition;
-    private _subject: null | Subject<LatLngPosition | null>;
+    private _subject: null | Subject<LatLngPosition>;
 
     constructor() {
 	if ('geolocation' in navigator) {
-	    this._subject = new Subject<LatLngPosition | null>();
+	    this._subject = new Subject<LatLngPosition>();
 
 	    const positionOptions: PositionOptions = {
 		enableHighAccuracy: true,
@@ -26,14 +26,14 @@ export class GeolocationService {
 		.geolocation
 		.watchPosition(
 		    success => {
-			this._subject.next(null);
+			this._subject!.next(new LatLngPosition(success.coords.latitude, success.coords.longitude));
 		    },
 		    error => {
 			if (null !== error) {
-			    this._subject.error(error);
+			    this._subject!.error(error);
 			} 
 			else {
-			    this._subject.error('Error in getting location.');
+			    this._subject!.error('Generic error in getting location.');
 			}
 		    },
 		    positionOptions
