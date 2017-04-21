@@ -1,11 +1,13 @@
 import { Component, OnInit, EventEmitter, Inject, NgZone } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { NgUploaderOptions, UploadedFile } from 'ngx-uploader';
 
 import { GeolocationService } from '../services/geolocation.service';
 import { BackendService } from '../services/backend.service';
+
+import { SubmissionPost } from '../models/post.model';
 
 @Component({
     selector: 'app-add-post',
@@ -26,9 +28,10 @@ export class AddPostComponent implements OnInit {
     public postForm: FormGroup;
 
     constructor( @Inject(NgZone) private zone: NgZone,
-        private route: ActivatedRoute,
-        private locationService: GeolocationService,
-        private backendService: BackendService) {
+		 private route: ActivatedRoute,
+		 private locationService: GeolocationService,
+		 private backendService: BackendService,
+		 private router: Router) {
         this.options = new NgUploaderOptions({
             url: 'https://todo',
             filterExtensions: true,
@@ -55,15 +58,15 @@ export class AddPostComponent implements OnInit {
         this.route
             .params
             .switchMap(
-            params => {
-                this.key = params['key'];
+		params => {
+                    this.key = params['key'];
 
-                return this.locationService.getCurrentPosition();
-            }
+                    return this.locationService.getCurrentPosition();
+		}
             )
             .subscribe(
-            success => { },
-            error => { }
+		success => { },
+		error => { }
             );
     }
 
@@ -84,6 +87,7 @@ export class AddPostComponent implements OnInit {
                 this.response = data;
                 if (data && data.response) {
                     this.response = JSON.parse(data.response);
+		    this.postForm.setValue({'imageId': 'foo'});
                 }
             });
         });
@@ -93,4 +97,20 @@ export class AddPostComponent implements OnInit {
         this.previewData = data;
     }
 
+    onSubmit() {
+	this.locationService
+	    .getCurrentPosition()
+	    .switchMap(
+		position => 
+		    this.backendService.addPost(new SubmissionPost(this.postForm.get('message').value, this.postForm.get('imageId').value, position, this.key))
+	    )
+	    .subscribe(
+		success => {
+		    this.router.navigate(['/bulletin', this.key]);
+		},
+		error => {
+		    console.log('AddPostComponent', error);
+		}
+	    );
+    }
 }
