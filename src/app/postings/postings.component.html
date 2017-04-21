@@ -3,7 +3,7 @@
 
     <md-toolbar-row>
 	<span class="center-header">
-	    123.324&deg;, 123.345&deg;
+	    {{ target.position.lat }}&deg;, {{ target.position.lng }}&deg;
 	</span>
     </md-toolbar-row>
 </md-toolbar>
@@ -13,7 +13,7 @@
     <md-card class="limit-width">
 	<md-card-header>
 	    <md-card-title class="center-header">
-		TODO There have been 7 visitors today at an average rate of 3 visitors per hour.
+		There have been {{ target.totalVisitors }} visitors today at an average rate of {{ target.averageVisitorsPerHour }} visitors per hour.
 	    </md-card-title>
 	    <md-card-subtitle></md-card-subtitle>
 	</md-card-header>

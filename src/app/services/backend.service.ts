@@ -6,7 +6,7 @@ import { Directions } from '../models/directions.model';
 import { ViewPost, SubmissionPost } from '../models/post.model';
 import { TargetLocation } from '../models/target.model';
 
-const EXAMPLE_LOCATION: TargetLocation = new TargetLocation(new LatLngPosition(1, 2), 'secret_key');
+const EXAMPLE_LOCATION: TargetLocation = new TargetLocation(new LatLngPosition(1, 2), 'secret_key', 10, 2);
 
 const EXAMPLE_POSTS: ViewPost[] = [
     new ViewPost('Wow! Great view!', 'https://material.angular.io/assets/img/examples/shiba2.jpg', 42, 1492547287),
@@ -28,6 +28,10 @@ export class BackendService {
     constructor() { }
 
     getTargetLocation(currentLocation: LatLngPosition): Observable<TargetLocation> {
+	return Observable.of(EXAMPLE_LOCATION);
+    }
+
+    getTargetLocationByKey(key: string): Observable<TargetLocation> {
 	return Observable.of(EXAMPLE_LOCATION);
     }
 
