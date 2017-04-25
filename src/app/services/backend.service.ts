@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Http, Headers, RequestOptions } from '@angular/http';
+
 import { Observable } from 'rxjs/Observable';
+
 import { LatLngPosition } from '../models/position.model';
 import { EasyPagination } from '../models/easy-pagination.model';
 import { Directions } from '../models/directions.model';
 import { ViewPost, SubmissionPost } from '../models/post.model';
 import { TargetLocation } from '../models/target.model';
+import { environment } from '../../environments/environment';
 
 const EXAMPLE_LOCATION: TargetLocation = new TargetLocation(new LatLngPosition(1, 2), 'secret_key', 10, 2);
 
@@ -25,21 +29,50 @@ const EXAMPLE_POSTS_PAGINATION: EasyPagination<ViewPost> = new EasyPagination<Vi
 @Injectable()
 export class BackendService {
 
-    constructor() { }
+    constructor(private http: Http) { }
 
     getTargetLocation(currentLocation: LatLngPosition): Observable<TargetLocation> {
-	return Observable.of(EXAMPLE_LOCATION);
+	return this.http
+	    .get(
+		`${environment.api_url}/target/${currentLocation.lat},${currentLocation.lng}`
+	    )
+	    .map(
+		response => response.json()
+	    );
     }
 
     getTargetLocationByKey(key: string): Observable<TargetLocation> {
-	return Observable.of(EXAMPLE_LOCATION);
+	return this.http
+	    .get(
+		`${environment.api_url}/target/key/${key}`
+	    )
+	    .map(
+		response => response.json()
+	    );
     }
 
-    getPosts(key: string, page: number = 0): Observable<EasyPagination<ViewPost>> {
-	return Observable.of(EXAMPLE_POSTS_PAGINATION);
+    getPosts(key: string, page: number = 1): Observable<EasyPagination<ViewPost>> {
+	return this.http
+	    .get(
+		`${environment.api_url}/posts/${key}/${page}`
+	    )
+	    .map(
+		response => response.json()
+	    );
     }
 
     addPost(post: SubmissionPost): Observable<boolean> {
-	return Observable.of(true);
+	const headers = new Headers({ 'Content-Type': 'application/json' });
+	const options = new RequestOptions({ headers: headers });
+
+	return this.http
+	    .post(
+		`${environment.api_url}/posts/${post.key}`,
+		JSON.stringify(post),
+		options
+	    )
+	    .map(
+		response => response.json()
+	    );
     }
 }

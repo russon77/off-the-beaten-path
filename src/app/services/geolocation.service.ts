@@ -15,8 +15,8 @@ const positionOptions: PositionOptions = {
 @Injectable()
 export class GeolocationService {
 
-    private _lastKnownPosition: null | LatLngPosition;
-    private _subject: null | Subject<LatLngPosition>;
+    private _lastKnownPosition: null | LatLngPosition = null;
+    private _subject: null | Subject<LatLngPosition> = null;
 
     constructor() {}
 

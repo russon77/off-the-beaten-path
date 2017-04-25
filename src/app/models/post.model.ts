@@ -5,7 +5,7 @@ export class SubmissionPost {
 	public text: string,
 	public pictureId: number, // id returned by file upload method in backend
 	public location: LatLngPosition,
-	public arrivalKey: string
+	public key: string
     ) {}
 }
 

@@ -33,15 +33,15 @@ export class AddPostComponent implements OnInit {
 		 private backendService: BackendService,
 		 private router: Router) {
         this.options = new NgUploaderOptions({
-            url: 'https://todo',
+            url: 'http://127.0.0.1:5000/image',
             filterExtensions: true,
             allowedExtensions: ['jpg', 'png'],
             data: {},
-            autoUpload: false,
+            autoUpload: true,
             fieldName: 'image',
             fieldReset: false,
             maxUploads: 1,
-            method: 'POST',
+            method: 'post',
             previewUrl: true,
             withCredentials: false
         });
@@ -87,7 +87,7 @@ export class AddPostComponent implements OnInit {
                 this.response = data;
                 if (data && data.response) {
                     this.response = JSON.parse(data.response);
-		    this.postForm.setValue({'imageId': 'foo'});
+		    this.postForm.setValue({'imageId': this.response.pictureId});
                 }
             });
         });

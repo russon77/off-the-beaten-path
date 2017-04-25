@@ -2,13 +2,13 @@
     <span class="center-header">Bulletin Board</span>
 
     <md-toolbar-row>
-	<span class="center-header">
+	<span *ngIf="target" class="center-header">
 	    {{ target.position.lat }}&deg;, {{ target.position.lng }}&deg;
 	</span>
     </md-toolbar-row>
 </md-toolbar>
 
-<div class="container">
+<div *ngIf="target" class="container">
     <!-- todo: this should fill remaining vertical space, if available -->
     <md-card class="limit-width">
 	<md-card-header>
@@ -19,6 +19,7 @@
 	</md-card-header>
 	<md-card-content>
 	    <md-list
+		*ngIf="posts"
 		class="limit-height"
 		infinite-scroll
 		[infiniteScrollDistance]="2"

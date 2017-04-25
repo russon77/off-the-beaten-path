@@ -23,7 +23,7 @@ export class DirectionsComponent implements OnInit {
     private _lastKnownLocation: LatLngPosition;
 
     constructor(private locationService: GeolocationService,
-        private backendService: BackendService) { }
+		private backendService: BackendService) { }
 
     public ngOnInit() {
         this.update();
@@ -37,31 +37,31 @@ export class DirectionsComponent implements OnInit {
         this.locationService
             .getCurrentPosition()
             .switchMap(
-            position => {
-                this._lastKnownLocation = position;
-                return this.backendService.getTargetLocation(position);
-            }
+		position => {
+                    this._lastKnownLocation = position;
+                    return this.backendService.getTargetLocation(position);
+		}
             )
             .subscribe(
-            success => {
-                const directions = new Directions(
-                    this._lastKnownLocation,
-                    success.position
-                );
+		success => {
+                    const directions = new Directions(
+			this._lastKnownLocation,
+			success.position
+                    );
 
-                this.directions = directions;
+                    this.directions = directions;
 
-                this.target = success;
+                    this.target = success;
 
-                if (this.directions.distance < 50) {
-                    console.log('DirectionsComponent', 'Within reach!');
+                    if (this.directions.distance < 50) {
+			console.log('DirectionsComponent', 'Within reach!');
 
-                    this.closeEnough = true;
-                }
-            },
-            error => {
-                console.log('DirectionsComponent', error);
-            }
+			this.closeEnough = true;
+                    }
+		},
+		error => {
+                    console.log('DirectionsComponent', error);
+		}
             );
     }
 }
