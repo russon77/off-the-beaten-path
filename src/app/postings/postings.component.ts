@@ -12,6 +12,7 @@ import { EasyPagination } from '../models/easy-pagination.model';
 import { TargetLocation } from '../models/target.model';
 
 import { ShareDialogComponent } from '../share-dialog/share-dialog.component';
+import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
 
 @Component({
     selector: 'app-postings',
@@ -78,8 +79,13 @@ export class PostingsComponent implements OnInit {
             );
     }
 
-    public openDialog() {
+    public openShareDialog() {
 	this.dialog.open(ShareDialogComponent);
+    }
+
+    public openPostDialog(post: ViewPost) {
+	const dialogRef = this.dialog.open(ImageViewerComponent);
+	dialogRef.componentInstance.post = post;
     }
 }
 

@@ -37,6 +37,7 @@ import { GeolocationService } from './services/geolocation.service';
 import { GameService } from './services/game.service';
 import { SettingsService } from './services/settings.service';
 import { ShareDialogComponent } from './share-dialog/share-dialog.component';
+import { ImageViewerComponent } from './image-viewer/image-viewer.component';
 
 @NgModule({
     declarations: [
@@ -46,10 +47,12 @@ import { ShareDialogComponent } from './share-dialog/share-dialog.component';
         PostingsComponent,
         AddPostComponent,
         SettingsAndHelpComponent,
-        ShareDialogComponent
+        ShareDialogComponent,
+        ImageViewerComponent
     ],
     entryComponents: [
-	ShareDialogComponent
+	ShareDialogComponent,
+	ImageViewerComponent
     ],
     imports: [
         BrowserModule,
