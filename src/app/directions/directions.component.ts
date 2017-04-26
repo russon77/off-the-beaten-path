@@ -23,9 +23,11 @@ export class DirectionsComponent implements OnInit, OnDestroy {
     public directions: Directions;
     public target: TargetLocation;
 
+    public transformation: number = 0;
     public closeEnough: boolean = false;
 
     private _automaticUpdateSubscription: null | Subscription = null;
+    private _doAutomaticUpdateSubscription: null | Subscription = null;    
 
     constructor(private locationService: GeolocationService,
 		private backendService: BackendService,
@@ -65,6 +67,8 @@ export class DirectionsComponent implements OnInit, OnDestroy {
 		    this.target = target;
 
 		    this.updateDirections(position);
+
+		    this.automaticUpdate();
 		},
 		error => {
                     console.log('DirectionsComponent', error);
@@ -75,6 +79,10 @@ export class DirectionsComponent implements OnInit, OnDestroy {
     public ngOnDestroy() {
 	if (null !== this._automaticUpdateSubscription) {
 	    this._automaticUpdateSubscription.unsubscribe();
+	}
+
+	if (null !== this._doAutomaticUpdateSubscription) {
+	    this._doAutomaticUpdateSubscription.unsubscribe();
 	}
     }
 
@@ -90,15 +98,19 @@ export class DirectionsComponent implements OnInit, OnDestroy {
     }
 
     public automaticUpdate() {
-	this.settings
+	this._doAutomaticUpdateSubscription = this.settings
 	    .doConstantUpdateEvents
 	    .subscribe(
 		value => {
 		    if (value) {
+			if (null !== this._automaticUpdateSubscription) {
+			    this._automaticUpdateSubscription.unsubscribe();
+			}
+
 			this._automaticUpdateSubscription = this.locationService
 			    .watchPosition()
 			    .subscribe(
-				value => this.updateDirections(value)
+				position => this.updateDirections(position)
 			    );
 		    } else {
 			if (null !== this._automaticUpdateSubscription) {

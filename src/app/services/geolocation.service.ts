@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/operator/take';
 
 import { LatLngPosition } from '../models/position.model';
@@ -16,7 +17,7 @@ const positionOptions: PositionOptions = {
 export class GeolocationService {
 
     private _lastKnownPosition: null | LatLngPosition = null;
-    private _subject: null | Subject<LatLngPosition> = null;
+    private _subject: null | ReplaySubject<LatLngPosition> = null;
 
     constructor() {}
 
@@ -56,7 +57,7 @@ export class GeolocationService {
 	if (null !== this._subject) {
 	    return this._subject;
 	} else if ('geolocation' in navigator) {
-	    this._subject = new Subject<LatLngPosition>();
+	    this._subject = new ReplaySubject<LatLngPosition>(1);
 
 	    navigator
 		.geolocation

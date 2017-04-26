@@ -23,7 +23,6 @@ export class SettingsAndHelpComponent implements OnInit, OnDestroy {
 	    .subscribe(
 		value => {
 		    this.doConstantUpdates = value;
-		    console.log('SettingsAndHelpComponent', value);
 		}
 	    );
     }
