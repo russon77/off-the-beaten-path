@@ -4,6 +4,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { NgUploaderOptions, UploadedFile } from 'ngx-uploader';
 
+import { environment } from '../../environments/environment';
+
 import { GeolocationService } from '../services/geolocation.service';
 import { BackendService } from '../services/backend.service';
 
@@ -33,7 +35,7 @@ export class AddPostComponent implements OnInit {
 		 private backendService: BackendService,
 		 private router: Router) {
         this.options = new NgUploaderOptions({
-            url: 'http://127.0.0.1:5000/image',
+	    url: `${environment.api_url}/image`,
             filterExtensions: true,
             allowedExtensions: ['jpg', 'png'],
             data: {},
@@ -87,7 +89,7 @@ export class AddPostComponent implements OnInit {
                 this.response = data;
                 if (data && data.response) {
                     this.response = JSON.parse(data.response);
-		    this.postForm.setValue({'imageId': this.response.pictureId});
+		    this.postForm.patchValue({'imageId': this.response.pictureId});
                 }
             });
         });
