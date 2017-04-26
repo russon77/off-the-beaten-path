@@ -1,26 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { SettingsService } from '../services/settings.service';
+
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'app-settings-and-help',
     templateUrl: './settings-and-help.component.html',
     styleUrls: ['./settings-and-help.component.css', '../common.css']
 })
-export class SettingsAndHelpComponent implements OnInit {
+export class SettingsAndHelpComponent implements OnInit, OnDestroy {
 
-    public doConstantUpdates: boolean;
+    public doConstantUpdates: null | boolean = null;
+
+    private _doConstantUpdateSubscription: null | Subscription = null;
 
     constructor(private settings: SettingsService) { }
 
     ngOnInit() {
-	this.settings
+	this._doConstantUpdateSubscription = this.settings
 	    .doConstantUpdateEvents
 	    .subscribe(
 		value => {
 		    this.doConstantUpdates = value;
+		    console.log('SettingsAndHelpComponent', value);
 		}
 	    );
+    }
+
+    ngOnDestroy() {
+	if (null !== this._doConstantUpdateSubscription) {
+	    this._doConstantUpdateSubscription.unsubscribe();
+	}
     }
 
     public toggleDoConstantUpdates() {

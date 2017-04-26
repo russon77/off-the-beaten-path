@@ -21,9 +21,7 @@ export class GeolocationService {
     constructor() {}
 
     getCurrentPosition(): Observable<LatLngPosition> {
-	if (null !== this._lastKnownPosition) {
-	    return Observable.of(this._lastKnownPosition);
-	} else if (null !== this._subject) {
+	if (null !== this._subject) {
 	    return this._subject.take(1);
 	} else if ('geolocation' in navigator) {
 	    const subject = new Subject<LatLngPosition>();
