@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { MdDialog } from '@angular/material';
+
 import 'rxjs/add/operator/zip';
 
 import { BackendService } from '../services/backend.service';
@@ -8,6 +10,8 @@ import { BackendService } from '../services/backend.service';
 import { ViewPost } from '../models/post.model';
 import { EasyPagination } from '../models/easy-pagination.model';
 import { TargetLocation } from '../models/target.model';
+
+import { ShareDialogComponent } from '../share-dialog/share-dialog.component';
 
 @Component({
     selector: 'app-postings',
@@ -24,7 +28,8 @@ export class PostingsComponent implements OnInit {
     public key: string;
 
     constructor(private backendService: BackendService,
-		private route: ActivatedRoute) { }
+		private route: ActivatedRoute,
+		private dialog: MdDialog) { }
 
     ngOnInit() {
         this.route
@@ -47,6 +52,8 @@ export class PostingsComponent implements OnInit {
                     this.currentPage = success.posts.pageNumber;
 
 		    this.target = success.target;
+
+		    console.log(this.posts);
 		},
 		error => {
                     console.log('PostingsComponent', error);
@@ -70,4 +77,9 @@ export class PostingsComponent implements OnInit {
 		}
             );
     }
+
+    public openDialog() {
+	this.dialog.open(ShareDialogComponent);
+    }
 }
+

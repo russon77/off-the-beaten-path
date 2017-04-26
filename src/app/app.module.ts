@@ -13,12 +13,15 @@ import {
     MdCardModule,
     MdInputModule,
     MdListModule,
-    MdIconModule
+    MdIconModule,
+    MdDialogModule
 } from '@angular/material';
 
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { NgUploaderModule } from 'ngx-uploader';
+
+import { ShareButtonsModule } from 'ng2-sharebuttons';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -33,6 +36,7 @@ import { BackendService } from './services/backend.service';
 import { GeolocationService } from './services/geolocation.service';
 import { GameService } from './services/game.service';
 import { SettingsService } from './services/settings.service';
+import { ShareDialogComponent } from './share-dialog/share-dialog.component';
 
 @NgModule({
     declarations: [
@@ -41,7 +45,11 @@ import { SettingsService } from './services/settings.service';
         DirectionsComponent,
         PostingsComponent,
         AddPostComponent,
-        SettingsAndHelpComponent
+        SettingsAndHelpComponent,
+        ShareDialogComponent
+    ],
+    entryComponents: [
+	ShareDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -60,9 +68,11 @@ import { SettingsService } from './services/settings.service';
         MdInputModule,
         MdListModule,
         MdIconModule,
+	MdDialogModule,
 
         InfiniteScrollModule,
-        NgUploaderModule
+        NgUploaderModule,
+	ShareButtonsModule.forRoot()
     ],
     providers: [
         GeolocationService,
