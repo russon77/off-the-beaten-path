@@ -32,6 +32,7 @@ import { SettingsAndHelpComponent } from './settings-and-help/settings-and-help.
 import { BackendService } from './services/backend.service';
 import { GeolocationService } from './services/geolocation.service';
 import { GameService } from './services/game.service';
+import { SettingsService } from './services/settings.service';
 
 @NgModule({
     declarations: [
@@ -66,7 +67,8 @@ import { GameService } from './services/game.service';
     providers: [
         GeolocationService,
         BackendService,
-        GameService
+        GameService,
+	SettingsService
     ],
     bootstrap: [AppComponent]
 })

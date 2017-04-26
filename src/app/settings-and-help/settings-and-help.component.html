@@ -9,6 +9,8 @@
     <md-card-content>
 	<section>
 	    <md-slide-toggle
+		(ngModelChange)="toggleDoConstantUpdates()"
+		[ngModel]="doConstantUpdates"
 		color="primary">
 		Refresh Location in Background? 
 	    </md-slide-toggle>
