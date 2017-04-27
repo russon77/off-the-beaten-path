@@ -1,17 +1,40 @@
 <ng-template [ngIf]="post">
-    <h1 md-dialog-title>View Post</h1>
-    <div md-dialog-content>
-	<p>
-	    {{ post.text }}
-	</p>
-	<img [src]="post.pictureUrl">
 
-	<p>
-	    {{post.timestamp | date}} 
-	    <span>{{ post.finalDistance }} m</span>
-	</p>
+    <h1 md-dialog-title>View Post</h1>
+
+    <div md-dialog-content>
+
+	<md-card>
+
+	    <img
+		md-card-image
+		*ngIf="post.pictureUrl"
+		[src]="post.pictureUrl">
+
+	    <md-card-content>
+		<p style="word-wrap: break-word;">
+		  {{ post.text }}
+		</p>
+		
+		<hr>
+		
+		<p>
+		    {{post.timestamp | date}}
+		</p>
+
+		<hr>
+
+		<p>
+		    {{ post.finalDistance }} m
+		</p>
+	    </md-card-content>
+
+	</md-card>
+
     </div>
+
     <div md-dialog-actions>
-	<button md-button (click)="dialogRef.close()">Close</button>
+	<button md-button md-dialog-close>Close</button>
     </div>
+
 </ng-template>
