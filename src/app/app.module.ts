@@ -38,6 +38,7 @@ import { GameService } from './services/game.service';
 import { SettingsService } from './services/settings.service';
 import { ShareDialogComponent } from './share-dialog/share-dialog.component';
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
+import { CompassComponent } from './compass/compass.component';
 
 @NgModule({
     declarations: [
@@ -48,7 +49,8 @@ import { ImageViewerComponent } from './image-viewer/image-viewer.component';
         AddPostComponent,
         SettingsAndHelpComponent,
         ShareDialogComponent,
-        ImageViewerComponent
+        ImageViewerComponent,
+        CompassComponent
     ],
     entryComponents: [
 	ShareDialogComponent,

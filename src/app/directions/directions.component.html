@@ -6,9 +6,7 @@
     <md-card class="limit-width">
 	<md-card-header>
 	</md-card-header>
-	<div style="background-image: url('assets/compass.svg'); background-size: 400px 400px;">
-	    <img style="transform: rotate(90deg);" width="400px" height="397px" src="assets/compass-dial.png">
-	</div>
+	<app-compass [rotation]="directions.compass"></app-compass>
 	<md-card-content>
 	    <div class="container">
 		<p>
