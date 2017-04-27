@@ -49,7 +49,7 @@ describe('SettingsAndHelpComponent', () => {
 
     beforeEach(() => {
 	dialog = TestBed.get(MdDialog);
-	let dialogRef = dialog.open(SettingsAndHelpComponent);
+	const dialogRef = dialog.open(SettingsAndHelpComponent);
 
 	component = dialogRef.componentInstance;
     });

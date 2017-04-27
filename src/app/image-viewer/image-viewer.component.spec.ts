@@ -46,7 +46,7 @@ describe('ImageViewerComponent', () => {
 
     beforeEach(() => {
 	dialog = TestBed.get(MdDialog);
-	let dialogRef = dialog.open(ImageViewerComponent);
+	const dialogRef = dialog.open(ImageViewerComponent);
 
 	component = dialogRef.componentInstance;
     });

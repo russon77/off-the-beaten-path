@@ -26,10 +26,10 @@ export class DirectionsComponent implements OnInit, OnDestroy {
     public directions: Directions;
     public target: TargetLocation;
 
-    public closeEnough: boolean = false;
+    public closeEnough = false;
 
     private _automaticUpdateSubscription: null | Subscription = null;
-    private _doAutomaticUpdateSubscription: null | Subscription = null;    
+    private _doAutomaticUpdateSubscription: null | Subscription = null;
 
     constructor(private locationService: GeolocationService,
 		private backendService: BackendService,
@@ -50,7 +50,7 @@ export class DirectionsComponent implements OnInit, OnDestroy {
 
 	    this.closeEnough = true;
 	}
-    }	
+    }
 
     public ngOnInit() {
 	this.locationService

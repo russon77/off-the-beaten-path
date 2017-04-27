@@ -42,7 +42,7 @@ export class GeolocationService {
 	    return this._subject.take(1);
 	} else if ('geolocation' in navigator) {
 	    const subject = new Subject<LatLngPosition>();
-	    
+
 	    navigator
 		.geolocation
 		.getCurrentPosition(
@@ -55,8 +55,7 @@ export class GeolocationService {
 		    error => {
 			if (null !== error) {
 			    subject.error(error);
-			} 
-			else {
+			} else {
 			    subject.error('Generic error in getting location.');
 			}
 		    },
@@ -87,8 +86,7 @@ export class GeolocationService {
 		    error => {
 			if (null !== error) {
 			    this._subject!.error(error);
-			} 
-			else {
+			} else {
 			    this._subject!.error('Generic error in getting location.');
 			}
 		    },
@@ -97,7 +95,7 @@ export class GeolocationService {
 
 	    return this._subject;
 	}
-	
+
 	return Observable.throw('watchPosition() unavailable');
     }
 

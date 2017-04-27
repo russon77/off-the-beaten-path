@@ -45,7 +45,7 @@ export class BackendServiceStub {
     addPost(post: SubmissionPost): Observable<boolean> {
 	return Observable.of(true);
     }
-}    
+}
 
 @Injectable()
 export class BackendService {

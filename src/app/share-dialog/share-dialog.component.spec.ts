@@ -40,7 +40,7 @@ describe('ShareDialogComponent', () => {
 
     beforeEach(() => {
 	dialog = TestBed.get(MdDialog);
-	let dialogRef = dialog.open(ShareDialogComponent);
+	const dialogRef = dialog.open(ShareDialogComponent);
 
 	component = dialogRef.componentInstance;
     });

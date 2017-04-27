@@ -29,7 +29,7 @@ export class AddPostComponent implements OnInit {
 
     public postForm: FormGroup;
 
-    public isSubmitting: boolean = false;
+    public isSubmitting = false;
 
     constructor( @Inject(NgZone) private zone: NgZone,
 		 private route: ActivatedRoute,
@@ -103,12 +103,19 @@ export class AddPostComponent implements OnInit {
 
     onSubmit() {
 	this.isSubmitting = true;
-	
+
 	this.locationService
 	    .getCurrentPosition()
 	    .switchMap(
-		position => 
-		    this.backendService.addPost(new SubmissionPost(this.postForm.get('message').value, this.postForm.get('imageId').value, position, this.key))
+		position =>
+		    this.backendService.addPost(
+			new SubmissionPost(
+			    this.postForm.get('message').value,
+			    this.postForm.get('imageId').value,
+			    position,
+			    this.key
+			)
+		    )
 	    )
 	    .subscribe(
 		success => {
