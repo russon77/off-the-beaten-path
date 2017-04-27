@@ -2,6 +2,10 @@
 
 [![Build Status](https://travis-ci.org/russon77/off-the-beaten-path.svg?branch=master)](https://travis-ci.org/russon77/off-the-beaten-path)
 
+[![dependencies Status](https://david-dm.org/russon77/off-the-beaten-path/status.svg)](https://david-dm.org/russon77/off-the-beaten-path)
+
+[![devDependencies Status](https://david-dm.org/russon77/off-the-beaten-path/dev-status.svg)](https://david-dm.org/russon77/off-the-beaten-path?type=dev)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
 
 ## Development server
