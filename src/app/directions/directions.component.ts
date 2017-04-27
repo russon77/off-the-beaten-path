@@ -84,6 +84,7 @@ export class DirectionsComponent implements OnInit, OnDestroy {
     public ngOnDestroy() {
 	if (null !== this._automaticUpdateSubscription) {
 	    this._automaticUpdateSubscription.unsubscribe();
+	    this.locationService.stopWatching();
 	}
 
 	if (null !== this._doAutomaticUpdateSubscription) {
@@ -110,6 +111,7 @@ export class DirectionsComponent implements OnInit, OnDestroy {
 		    if (value) {
 			if (null !== this._automaticUpdateSubscription) {
 			    this._automaticUpdateSubscription.unsubscribe();
+			    this.locationService.stopWatching();
 			}
 
 			this._automaticUpdateSubscription = this.locationService
@@ -121,6 +123,7 @@ export class DirectionsComponent implements OnInit, OnDestroy {
 			if (null !== this._automaticUpdateSubscription) {
 			    this._automaticUpdateSubscription.unsubscribe();
 			    this._automaticUpdateSubscription = null;
+			    this.locationService.stopWatching();
 			}
 		    }
 		}

@@ -18,6 +18,7 @@ export class GeolocationService {
 
     private _lastKnownPosition: null | LatLngPosition = null;
     private _subject: null | ReplaySubject<LatLngPosition> = null;
+    private _watchId: null | number = null;
 
     constructor() {}
 
@@ -59,7 +60,7 @@ export class GeolocationService {
 	} else if ('geolocation' in navigator) {
 	    this._subject = new ReplaySubject<LatLngPosition>(1);
 
-	    navigator
+	    this._watchId = navigator
 		.geolocation
 		.watchPosition(
 		    success => {
@@ -83,5 +84,16 @@ export class GeolocationService {
 	}
 	
 	return Observable.throw('watchPosition() unavailable');
+    }
+
+    stopWatching(): void {
+	if (null !== this._watchId) {
+	    navigator.geolocation.clearWatch(this._watchId);
+	}
+
+	if (null !== this._subject) {
+	    this._subject.complete();
+	    this._subject = null;
+	}
     }
 }
