@@ -21,7 +21,7 @@ export class AddPostComponent implements OnInit {
     public options: NgUploaderOptions;
     public sizeLimit = 1000000 * 12; // 12 MB
     public previewData: any;
-    public errorMessage: string;
+    public imageSubtitle: string;
     public response: any;
     public inputUploadEvents: EventEmitter<string>;
 
@@ -61,28 +61,22 @@ export class AddPostComponent implements OnInit {
     ngOnInit() {
         this.route
             .params
-            .switchMap(
+	    .subscribe(
 		params => {
-                    this.key = params['key'];
-
-                    return this.locationService.getCurrentPosition();
+		    this.key = params['key'];
 		}
-            )
-            .subscribe(
-		success => { },
-		error => { }
-            );
-    }
-
-    startUpload() {
-        this.inputUploadEvents.emit('startUpload');
+	    );
     }
 
     beforeUpload(uploadingFile: UploadedFile): void {
         if (uploadingFile.size > this.sizeLimit) {
             uploadingFile.setAbort();
-            this.errorMessage = 'File is too large!';
+            this.imageSubtitle = 'File is too large!';
         }
+
+	this.isSubmitting = true;
+
+	this.imageSubtitle = 'Uploading...';
     }
 
     handleUpload(data: any) {
@@ -92,6 +86,10 @@ export class AddPostComponent implements OnInit {
                 if (data && data.response) {
                     this.response = JSON.parse(data.response);
 		    this.postForm.patchValue({'imageId': this.response.pictureId});
+
+		    this.isSubmitting = false;
+
+		    this.imageSubtitle = 'Uploaded image!';
                 }
             });
         });

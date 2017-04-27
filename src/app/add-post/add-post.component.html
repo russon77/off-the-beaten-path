@@ -4,9 +4,10 @@
     </span>
 </md-toolbar>
 
-<div *ngIf="!isSubmitting; else loader" class="container">
+<div class="container">
     <md-card class="limit-width">
 	<md-card-content>
+
 	    <form [formGroup]="postForm" novalidate>
  		<p>
 		    <md-input-container class="full-width">
@@ -39,23 +40,22 @@
 	    </p>
 
 	    <div *ngIf="previewData">
-		<h6>Selected Image</h6>
-		<img width="380" [src]="previewData">
+		<h6>{{ imageSubtitle }}</h6>
+		<img width="100%" [src]="previewData">
+	    </div>
+
+	    <div *ngIf="isSubmitting" class="sk-folding-cube">
+		<div class="sk-cube1 sk-cube"></div>
+		<div class="sk-cube2 sk-cube"></div>
+		<div class="sk-cube4 sk-cube"></div>
+		<div class="sk-cube3 sk-cube"></div>
 	    </div>
 
 	</md-card-content>
 	<md-card-actions class="container">
 	    <a [routerLink]="['/bulletin', key]" md-button class="example-spacer">Return</a>
-	    <button (click)="onSubmit()" [disabled]="!postForm.valid" md-button class="example-spacer">Submit</button>
+	    <button (click)="onSubmit()" [disabled]="!postForm.valid || isSubmitting" md-button class="example-spacer">Submit</button>
 	</md-card-actions>
     </md-card>
 </div>
 
-<ng-template #loader>
-    <div class="sk-folding-cube">
-	<div class="sk-cube1 sk-cube"></div>
-	<div class="sk-cube2 sk-cube"></div>
-	<div class="sk-cube4 sk-cube"></div>
-	<div class="sk-cube3 sk-cube"></div>
-    </div>
-</ng-template>
