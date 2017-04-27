@@ -1,6 +1,6 @@
 .limit-height {
-    overflow-y: scroll; 
-    height: 300px;
+    overflow-y: auto; 
+    max-height: 300px;
 }
 
 .container {
