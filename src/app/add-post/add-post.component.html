@@ -4,7 +4,7 @@
     </span>
 </md-toolbar>
 
-<div class="container">
+<div *ngIf="!isSubmitting; else loader" class="container">
     <md-card class="limit-width">
 	<md-card-content>
 	    <form [formGroup]="postForm" novalidate>
@@ -50,3 +50,12 @@
 	</md-card-actions>
     </md-card>
 </div>
+
+<ng-template #loader>
+    <div class="sk-folding-cube">
+	<div class="sk-cube1 sk-cube"></div>
+	<div class="sk-cube2 sk-cube"></div>
+	<div class="sk-cube4 sk-cube"></div>
+	<div class="sk-cube3 sk-cube"></div>
+    </div>
+</ng-template>

@@ -1,14 +1,14 @@
 <md-toolbar>
     <span class="center-header">Bulletin Board</span>
 
-    <md-toolbar-row>
-	<span *ngIf="target" class="center-header">
+    <md-toolbar-row *ngIf="target">
+	<span class="center-header">
 	    {{ target.position.lat }}&deg;, {{ target.position.lng }}&deg;
 	</span>
     </md-toolbar-row>
 </md-toolbar>
 
-<div *ngIf="target" class="container">
+<div *ngIf="target; else loader" class="container">
     <!-- todo: this should fill remaining vertical space, if available -->
     <md-card class="limit-width">
 	<md-card-header>
@@ -48,4 +48,16 @@
     </md-card>
 </div>
 
-
+<ng-template #loader>
+    <div class="sk-cube-grid">
+	<div class="sk-cube sk-cube1"></div>
+	<div class="sk-cube sk-cube2"></div>
+	<div class="sk-cube sk-cube3"></div>
+	<div class="sk-cube sk-cube4"></div>
+	<div class="sk-cube sk-cube5"></div>
+	<div class="sk-cube sk-cube6"></div>
+	<div class="sk-cube sk-cube7"></div>
+	<div class="sk-cube sk-cube8"></div>
+	<div class="sk-cube sk-cube9"></div>
+    </div>
+</ng-template>

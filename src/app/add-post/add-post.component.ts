@@ -29,6 +29,8 @@ export class AddPostComponent implements OnInit {
 
     public postForm: FormGroup;
 
+    public isSubmitting: boolean = false;
+
     constructor( @Inject(NgZone) private zone: NgZone,
 		 private route: ActivatedRoute,
 		 private locationService: GeolocationService,
@@ -100,6 +102,8 @@ export class AddPostComponent implements OnInit {
     }
 
     onSubmit() {
+	this.isSubmitting = true;
+	
 	this.locationService
 	    .getCurrentPosition()
 	    .switchMap(
@@ -112,6 +116,7 @@ export class AddPostComponent implements OnInit {
 		},
 		error => {
 		    console.log('AddPostComponent', error);
+		    this.isSubmitting = false;
 		}
 	    );
     }

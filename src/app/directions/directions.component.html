@@ -2,7 +2,7 @@
     <span class="center-header">You're On Your Way</span>
 </md-toolbar>
 
-<div *ngIf="directions" class="container">
+<div *ngIf="directions; else loader" class="container">
     <md-card class="limit-width">
 	<md-card-header>
 	</md-card-header>
@@ -27,3 +27,7 @@
 	</md-card-actions>
     </md-card>
 </div>
+
+<ng-template #loader>
+    <div class="directions-spinner"></div>
+</ng-template>
