@@ -25,7 +25,8 @@ export class PostingsComponent implements OnInit {
 
     public posts: ViewPost[];
     public currentPage: number;
-
+    public moreAvailable = true;
+    
     public key: string;
 
     constructor(private backendService: BackendService,
@@ -52,9 +53,9 @@ export class PostingsComponent implements OnInit {
                     this.posts = success.posts.data;
                     this.currentPage = success.posts.pageNumber;
 
-		    this.target = success.target;
+		    this.moreAvailable = !success.posts.lastPage;
 
-		    console.log(this.posts);
+		    this.target = success.target;
 		},
 		error => {
                     console.log('PostingsComponent', error);
@@ -63,6 +64,10 @@ export class PostingsComponent implements OnInit {
     }
 
     public onScrolled() {
+	if (false === this.moreAvailable) {
+	    return;
+	}
+	
         this.backendService
             .getPosts(
 		this.key,
@@ -72,6 +77,7 @@ export class PostingsComponent implements OnInit {
 		success => {
                     this.posts = this.posts.concat(success.data);
                     this.currentPage = success.pageNumber;
+		    this.moreAvailable = !success.lastPage;
 		},
 		error => {
                     console.log('PostingsComponent', error);
