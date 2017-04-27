@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { MdDialog } from '@angular/material';
 
-import { GameService } from '../services/game.service';
 import { GeolocationService } from '../services/geolocation.service';
 import { BackendService } from '../services/backend.service';
 import { SettingsService } from '../services/settings.service';

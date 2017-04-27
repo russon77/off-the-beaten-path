@@ -14,6 +14,21 @@ const positionOptions: PositionOptions = {
 };
 
 @Injectable()
+export class GeolocationServiceStub {
+    constructor() {}
+
+    getCurrentPosition(): Observable<LatLngPosition> {
+	return Observable.throw('getCurrentPosition() unavailable');
+    }
+
+    watchPosition(): Observable<LatLngPosition> {
+	return Observable.throw('watchPosition() unavailable');
+    }
+
+    stopWatching(): void {}
+}
+
+@Injectable()
 export class GeolocationService {
 
     private _lastKnownPosition: null | LatLngPosition = null;

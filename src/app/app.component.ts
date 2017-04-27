@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { GameService } from './services/game.service';
 import { GeolocationService } from './services/geolocation.service';
 
 @Component({
@@ -8,17 +7,19 @@ import { GeolocationService } from './services/geolocation.service';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-    constructor(private locationService: GeolocationService) {
+export class AppComponent implements OnInit {
+    constructor(private locationService: GeolocationService) {}
+
+    ngOnInit() {
         this.locationService
             .getCurrentPosition()
             .subscribe(
-            success => {
-                (<any>window).loading_screen.finish();
-            },
-            error => {
-                console.log('AppComponent', error);
-            }
+		success => {
+                    (<any>window).loading_screen.finish();
+		},
+		error => {
+                    console.log('AppComponent', error);
+		}
             );
     }
 }

@@ -27,6 +27,27 @@ const EXAMPLE_POSTS: ViewPost[] = [
 const EXAMPLE_POSTS_PAGINATION: EasyPagination<ViewPost> = new EasyPagination<ViewPost>(EXAMPLE_POSTS, 1, false);
 
 @Injectable()
+export class BackendServiceStub {
+    constructor() {}
+
+    getTargetLocation(currentLocation: LatLngPosition): Observable<TargetLocation> {
+	return Observable.of(EXAMPLE_LOCATION);
+    }
+
+    getTargetLocationByKey(key: string): Observable<TargetLocation> {
+	return Observable.of(EXAMPLE_LOCATION);
+    }
+
+    getPosts(key: string, page: number = 1): Observable<EasyPagination<ViewPost>> {
+	return Observable.of(EXAMPLE_POSTS_PAGINATION);
+    }
+
+    addPost(post: SubmissionPost): Observable<boolean> {
+	return Observable.of(true);
+    }
+}    
+
+@Injectable()
 export class BackendService {
 
     constructor(private http: Http) { }

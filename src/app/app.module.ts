@@ -34,7 +34,6 @@ import { SettingsAndHelpComponent } from './settings-and-help/settings-and-help.
 
 import { BackendService } from './services/backend.service';
 import { GeolocationService } from './services/geolocation.service';
-import { GameService } from './services/game.service';
 import { SettingsService } from './services/settings.service';
 import { ShareDialogComponent } from './share-dialog/share-dialog.component';
 import { ImageViewerComponent } from './image-viewer/image-viewer.component';
@@ -83,7 +82,6 @@ import { CompassComponent } from './compass/compass.component';
     providers: [
         GeolocationService,
         BackendService,
-        GameService,
 	SettingsService
     ],
     bootstrap: [AppComponent]
