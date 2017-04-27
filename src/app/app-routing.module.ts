@@ -18,10 +18,6 @@ const routes: Routes = [
     {
 	path: 'post/:key',
 	component: AddPostComponent
-    },
-    {
-	path: 'help',
-	component: SettingsAndHelpComponent
     }
 ];
 

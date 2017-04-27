@@ -11,7 +11,7 @@ function toDegrees(num: number): number {
 }
 
 export class Directions {
-    public compass: CompassDirection;
+    public compass: number; // angle in degrees, 0 = North, 90 = W, etc.
     public distance: number; // meters
     
     constructor(
@@ -41,7 +41,7 @@ export class Directions {
 	return d;
     }
 
-    static calculateCompassDirection(a: LatLngPosition, b: LatLngPosition): CompassDirection {
+    static calculateCompassDirection(a: LatLngPosition, b: LatLngPosition): number {
 	const φ1 = toRadians(a.lat), φ2 = toRadians(b.lat);
 	const Δλ = toRadians(b.lng-a.lng);
 
@@ -53,14 +53,6 @@ export class Directions {
 
 	const direction = (toDegrees(θ)+360) % 360;
 
-	if (direction >= 45 && direction < 135) {
-	    return 'N';
-	} else if (direction >= 135 && direction < 225) {
-	    return 'W';
-	} else if (direction >= 225 && direction < 315) {
-	    return 'S';
-	} else {
-	    return 'E';
-	}
+	return direction;
     }
 }

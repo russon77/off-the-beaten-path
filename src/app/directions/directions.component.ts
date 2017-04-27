@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
+import { MdDialog } from '@angular/material';
+
 import { GameService } from '../services/game.service';
 import { GeolocationService } from '../services/geolocation.service';
 import { BackendService } from '../services/backend.service';
@@ -8,6 +10,8 @@ import { SettingsService } from '../services/settings.service';
 import { Directions } from '../models/directions.model';
 import { TargetLocation } from '../models/target.model';
 import { LatLngPosition } from '../models/position.model';
+
+import { SettingsAndHelpComponent } from '../settings-and-help/settings-and-help.component';
 
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -23,7 +27,6 @@ export class DirectionsComponent implements OnInit, OnDestroy {
     public directions: Directions;
     public target: TargetLocation;
 
-    public transformation: number = 0;
     public closeEnough: boolean = false;
 
     private _automaticUpdateSubscription: null | Subscription = null;
@@ -31,7 +34,9 @@ export class DirectionsComponent implements OnInit, OnDestroy {
 
     constructor(private locationService: GeolocationService,
 		private backendService: BackendService,
-		private settings: SettingsService) { }
+		private settings: SettingsService,
+		private dialog: MdDialog) {
+    }
 
     public updateDirections(updatedPosition: LatLngPosition): void {
 	const directions = new Directions(
@@ -120,5 +125,9 @@ export class DirectionsComponent implements OnInit, OnDestroy {
 		    }
 		}
 	    );
+    }
+
+    public onOpenSettings() {
+	this.dialog.open(SettingsAndHelpComponent);
     }
 }

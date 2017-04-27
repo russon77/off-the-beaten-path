@@ -6,7 +6,9 @@
     <md-card class="limit-width">
 	<md-card-header>
 	</md-card-header>
-	<img md-card-image [ngClass]="directions.compass" src="assets/compass-detailed.svg">
+	<div style="background-image: url('assets/compass.svg'); background-size: 400px 400px;">
+	    <img style="transform: rotate(90deg);" width="400px" height="397px" src="assets/compass-dial.png">
+	</div>
 	<md-card-content>
 	    <div class="container">
 		<p>
@@ -23,7 +25,7 @@
 		    Update
 		</button>
 	    </ng-template>
-	    <a class="example-spacer" routerLink="/help" md-button>Settings and Help</a>
+	    <button class="example-spacer" (click)="onOpenSettings()" md-button>Settings and Help</button>
 	</md-card-actions>
     </md-card>
 </div>

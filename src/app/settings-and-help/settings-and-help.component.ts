@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MdDialogRef } from '@angular/material';
 
 import { SettingsService } from '../services/settings.service';
 
@@ -15,7 +16,8 @@ export class SettingsAndHelpComponent implements OnInit, OnDestroy {
 
     private _doConstantUpdateSubscription: null | Subscription = null;
 
-    constructor(private settings: SettingsService) { }
+    constructor(private settings: SettingsService,
+		private dialogRef: MdDialogRef<SettingsAndHelpComponent>) { }
 
     ngOnInit() {
 	this._doConstantUpdateSubscription = this.settings

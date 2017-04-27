@@ -52,7 +52,8 @@ import { ImageViewerComponent } from './image-viewer/image-viewer.component';
     ],
     entryComponents: [
 	ShareDialogComponent,
-	ImageViewerComponent
+	ImageViewerComponent,
+	SettingsAndHelpComponent
     ],
     imports: [
         BrowserModule,
