@@ -1,3 +1,9 @@
+sudo: false
+dist: trusty
+addons:
+  apt:
+    packages:
+      - google-chrome-stable
 language: node_js
 node_js:
   - "7"
