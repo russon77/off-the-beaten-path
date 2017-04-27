@@ -4,3 +4,13 @@ html, body {
     height: 100%;
     margin: 0;
 }
+
+md-dialog-container {
+    width: 400px !important;
+}
+
+@media all and (max-width: 400px) {
+    md-dialog-container {
+	width: 100% !important;
+    }
+ }
