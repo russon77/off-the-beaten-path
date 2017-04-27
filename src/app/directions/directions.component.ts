@@ -16,6 +16,12 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/zip';
 
+function vibrate(duration: number = 200) {
+    if ('vibrate' in navigator) {
+	navigator.vibrate(duration);
+    }
+}
+
 @Component({
     selector: 'app-directions',
     templateUrl: './directions.component.html',
@@ -48,7 +54,12 @@ export class DirectionsComponent implements OnInit, OnDestroy {
 	if (this.directions.distance < 50) {
 	    console.log('DirectionsComponent', 'Within reach!');
 
-	    this.closeEnough = true;
+	    if (false === this.closeEnough) {
+		vibrate();
+		this.closeEnough = true;
+	    }
+	} else {
+	    this.closeEnough = false;
 	}
     }
 
