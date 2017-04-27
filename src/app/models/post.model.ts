@@ -10,14 +10,11 @@ export class SubmissionPost {
 }
 
 export class ViewPost {
-    public timestamp: Date;
-    
     constructor(
 	public text: string,
 	public pictureUrl: string,
 	public finalDistance: number,
-	private _timestamp: number // milliseconds since Unix Epoch
+	public timestamp: number // milliseconds since Unix Epoch
     ) {
-	this.timestamp = new Date(_timestamp);
     }
 }

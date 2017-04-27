@@ -57,7 +57,18 @@ export class BackendService {
 		`${environment.api_url}/posts/${key}/${page}`
 	    )
 	    .map(
-		response => response.json()
+		response => {
+		    const data: EasyPagination<ViewPost> = response.json();
+
+		    // dates in Python are stored as floats in seconds,
+		    // so here we convert to milliseconds for JS support
+		    data.data.forEach(
+			(item) => {
+			    item.timestamp *= 1000.0;
+			}
+		    );
+		    return data;
+		}
 	    );
     }
 
