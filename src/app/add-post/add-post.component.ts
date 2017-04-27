@@ -110,8 +110,8 @@ export class AddPostComponent implements OnInit {
 		position =>
 		    this.backendService.addPost(
 			new SubmissionPost(
-			    this.postForm.get('message').value,
-			    this.postForm.get('imageId').value,
+			    this.postForm.get('message')!.value,
+			    this.postForm.get('imageId')!.value,
 			    position,
 			    this.key
 			)
