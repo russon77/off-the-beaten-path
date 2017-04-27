@@ -30,7 +30,10 @@
 
     <section>
 	<p>
-	    <a href="#">
+	    <a
+		*ngIf="target !== null"
+		target="_blank"
+		href="https://www.google.com/maps?q={{ target.position.lat }},{{ target.position.lng }}">
 		Having trouble finding the location? (Redirects to Google Maps for destination)
 	    </a>
 	</p>

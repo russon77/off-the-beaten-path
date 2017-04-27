@@ -3,6 +3,8 @@ import { MdDialogRef } from '@angular/material';
 
 import { SettingsService } from '../services/settings.service';
 
+import { TargetLocation } from '../models/target.model';
+
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -15,6 +17,8 @@ export class SettingsAndHelpComponent implements OnInit, OnDestroy {
     public doConstantUpdates: null | boolean = null;
 
     private _doConstantUpdateSubscription: null | Subscription = null;
+
+    public target: null | TargetLocation = null;
 
     constructor(private settings: SettingsService,
 		private dialogRef: MdDialogRef<SettingsAndHelpComponent>) { }

@@ -131,6 +131,7 @@ export class DirectionsComponent implements OnInit, OnDestroy {
     }
 
     public onOpenSettings() {
-	this.dialog.open(SettingsAndHelpComponent);
+	const settingsDialog = this.dialog.open(SettingsAndHelpComponent);
+	settingsDialog.componentInstance.target = this.target;
     }
 }
