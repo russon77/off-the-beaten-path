@@ -22,6 +22,8 @@ describe('ShareDialogComponent', () => {
     let dialog: MdDialog;
     let overlayContainerElement: HTMLElement;
 
+    let nl: NodeListOf<Element>;
+
     beforeEach(async(() => {
 	TestBed.configureTestingModule({
 	    imports: [DialogTestModule, MdDialogModule.forRoot()],
@@ -43,11 +45,20 @@ describe('ShareDialogComponent', () => {
 	const dialogRef = dialog.open(ShareDialogComponent);
 
 	component = dialogRef.componentInstance;
+
+	nl = overlayContainerElement.getElementsByTagName("app-share-dialog");
     });
 
     it('should create', () => {
 	expect(component).toBeTruthy();
     });
 
+    it('should create the element in the dom', () => {
+	expect(nl.length).toBe(1);
+    });
 
+    it('should display the share buttons', () => {
+	let buttonsNl = nl[0].getElementsByTagName('share-buttons');
+	expect(buttonsNl.length).toBe(1);
+    });
 });

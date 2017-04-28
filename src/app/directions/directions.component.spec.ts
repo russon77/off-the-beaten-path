@@ -1,10 +1,14 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { MaterialModule } from '@angular/material';
+import { RouterTestingModule } from '@angular/router/testing';
+import { CommonModule } from '@angular/common';
 
 import { MdDialog } from '@angular/material';
 import { MdDialogStub } from '../../../testing/material-stubs';
 
 import { DirectionsComponent } from './directions.component';
+import { CompassComponent } from '../compass/compass.component';
 
 import { GeolocationService, GeolocationServiceStub } from '../services/geolocation.service';
 import { BackendService, BackendServiceStub } from '../services/backend.service';
@@ -31,8 +35,16 @@ describe('DirectionsComponent', () => {
 		},
 		SettingsService
 	    ],
-	    declarations: [ DirectionsComponent ],
-	    schemas: [NO_ERRORS_SCHEMA]
+	    declarations: [
+		DirectionsComponent,
+		CompassComponent
+	    ],
+	    imports: [
+		MaterialModule,
+		CommonModule,
+		RouterTestingModule
+	    ],
+	    schemas: []
 	})
 	    .compileComponents();
     }));

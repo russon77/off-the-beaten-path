@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { By, BrowserModule } from '@angular/platform-browser';
-import { DebugElement, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { DebugElement, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MdDialogModule, MdDialog, OverlayContainer, MaterialModule } from '@angular/material';
@@ -18,7 +18,7 @@ import { ImageViewerComponent } from './image-viewer.component';
 	NoopAnimationsModule,
 	CommonModule
     ],
-    schemas: [NO_ERRORS_SCHEMA]
+    schemas: []
 })
 class DialogTestModule { }
 

@@ -16,11 +16,11 @@ import { SettingsService } from '../services/settings.service';
     exports: [SettingsAndHelpComponent],
     entryComponents: [SettingsAndHelpComponent],
     imports: [
-	MdDialogModule,
+	MaterialModule,
 	NoopAnimationsModule,
 	CommonModule
     ],
-    schemas: [NO_ERRORS_SCHEMA]
+    schemas: []
 })
 class DialogTestModule { }
 

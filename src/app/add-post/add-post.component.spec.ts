@@ -1,6 +1,13 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MaterialModule } from '@angular/material';
+import { NgUploaderModule } from 'ngx-uploader';
 
 import { AddPostComponent } from './add-post.component';
 
@@ -12,6 +19,8 @@ import { RouterStub, ActivatedRouteStub } from '../../../testing/router-stubs';
 describe('AddPostComponent', () => {
     let component: AddPostComponent;
     let fixture: ComponentFixture<AddPostComponent>;
+    let de: DebugElement;
+    let el: HTMLElement;
 
     beforeEach(async(() => {
 	TestBed.configureTestingModule({
@@ -21,21 +30,19 @@ describe('AddPostComponent', () => {
 		    useClass: GeolocationServiceStub
 		},
 		{
-		    provide: Router,
-		    useClass: RouterStub
-		},
-		{
-		    provide: ActivatedRoute,
-		    useClass: ActivatedRouteStub
-		},
-		{
 		    provide: BackendService,
 		    useClass: BackendServiceStub
 		}
 	    ],
-	    schemas: [
-		NO_ERRORS_SCHEMA
+	    imports: [
+		MaterialModule,
+		NgUploaderModule,
+		RouterTestingModule,
+		FormsModule,
+		ReactiveFormsModule,
+		NoopAnimationsModule
 	    ],
+	    schemas: [],
 	    declarations: [ AddPostComponent ]
 	})
 	    .compileComponents();
@@ -45,6 +52,9 @@ describe('AddPostComponent', () => {
 	fixture = TestBed.createComponent(AddPostComponent);
 	component = fixture.componentInstance;
 	fixture.detectChanges();
+
+	de = fixture.debugElement.query(By.css('md-card'));
+	el = de.nativeElement;
     });
 
     it('should create', () => {
