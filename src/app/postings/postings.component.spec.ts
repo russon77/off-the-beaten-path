@@ -16,8 +16,12 @@ import { MdDialogStub } from '../../../testing/material-stubs';
 describe('PostingsComponent', () => {
     let component: PostingsComponent;
     let fixture: ComponentFixture<PostingsComponent>;
+    let route: ActivatedRouteStub;
 
     beforeEach(async(() => {
+	route = new ActivatedRouteStub();
+	route.testParams = {key: 123};
+	
 	TestBed.configureTestingModule({
 	    providers: [
 		{
@@ -26,7 +30,7 @@ describe('PostingsComponent', () => {
 		},
 		{
 		    provide: ActivatedRoute,
-		    useClass: ActivatedRouteStub
+		    useValue: route
 		},
 		{
 		    provide: MdDialog,
