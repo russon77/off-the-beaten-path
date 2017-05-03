@@ -11,6 +11,8 @@
 - ngx-infinite-scroll
 - ngx-uploader
 
+Also check out the [backend repo here](https://github.com/russon77/off-the-beaten-path-backend)
+
 ## Screenshots
 
 ![Home Directions](/screenshots/directions.png?raw=true "Directions")
