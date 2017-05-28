@@ -8,18 +8,21 @@ import { GeolocationService } from './services/geolocation.service';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    constructor(private locationService: GeolocationService) {}
+    constructor(private locationService: GeolocationService) { }
 
     ngOnInit() {
+        (<any>window).loading_screen.finish();
+
+        // seed the initial location
         this.locationService
             .getCurrentPosition()
             .subscribe(
-		success => {
-                    (<any>window).loading_screen.finish();
-		},
-		error => {
-                    console.log('AppComponent', error);
-		}
+            success => {
+                // success
+            },
+            error => {
+                console.log('AppComponent', error);
+            }
             );
     }
 }
